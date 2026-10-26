@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7654d8">
+<meta name="description" content="EDU KIDZ - Pusat permainan pembelajaran Matematik Pra Sekolah hingga Tahun 6.">
+<title>EDU KIDZ | Pusat Game Pembelajaran</title>
+
+<style>
+:root {
+  --navy:#233568;
+  --purple:#7654d8;
+  --pink:#ff75a0;
+  --blue:#58b9f4;
+  --green:#43c99b;
+  --yellow:#ffda65;
+  --bg:#f5f7ff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--navy);
+}
+header {
+  text-align:center;
+  padding:35px 18px 30px;
+  background:linear-gradient(135deg,#7654d8,#58b9f4);
+  color:white;
+}
+.logo {
+  font-size:clamp(2rem,5vw,3.4rem);
+  font-weight:900;
+  letter-spacing:2px;
+  text-shadow:2px 3px 0 #42328e;
+}
+header p {
+  margin:12px auto 0;
+  max-width:650px;
+  line-height:1.6;
+}
+main {
+  max-width:1150px;
+  margin:auto;
+  padding:24px 16px 50px;
+}
+.search-box {
+  display:block;
+  width:100%;
+  padding:16px;
+  border:2px solid #e0e4f5;
+  border-radius:16px;
+  font-size:16px;
+  outline-color:var(--purple);
+  background:white;
+}
+.toolbar {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:15px 0 25px;
+}
+.filter {
+  border:0;
+  padding:11px 15px;
+  border-radius:22px;
+  background:white;
+  color:var(--navy);
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 2px 7px #25356812;
+}
+.filter.active {
+  background:var(--purple);
+  color:white;
+}
+.filter:focus-visible,.topic:focus-visible {
+  outline:3px solid var(--blue);
+  outline-offset:3px;
+}
+.section-title {
+  margin:28px 0 16px;
+  font-size:1.5rem;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));
+  gap:18px;
+}
+.card {
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 5px 18px #26356812;
+  border:1px solid #e9eafa;
+}
+.card-head {
+  padding:18px;
+  color:white;
+}
+.card-head h2 {
+  margin:0 0 6px;
+  font-size:1.35rem;
+}
+.card-head p {
+  margin:0;
+  opacity:.95;
+  font-size:.9rem;
+}
+.color-0 { background:linear-gradient(135deg,#ff78a0,#ff9c76); }
+.color-1 { background:linear-gradient(135deg,#7654d8,#a58bf7); }
+.color-2 { background:linear-gradient(135deg,#20adad,#43c99b); }
+.color-3 { background:linear-gradient(135deg,#338fe5,#58b9f4); }
+.color-4 { background:linear-gradient(135deg,#ed9c31,#ffcf62); }
+.color-5 { background:linear-gradient(135deg,#e45f9c,#bb76de); }
+.card-body { padding:15px; }
+.topic {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  margin:8px 0;
+  background:#f6f7ff;
+  color:var(--navy);
+  border-radius:11px;
+  text-decoration:none;
+  font-weight:700;
+  line-height:1.4;
+  transition:transform .15s,background .15s;
+}
+.topic:hover {
+  background:#e9e5ff;
+  transform:translateY(-2px);
+}
+.topic span { flex:1; }
+.topic .arrow {
+  color:var(--purple);
+  font-size:1.2rem;
+}
+.empty {
+  display:none;
+  text-align:center;
+  padding:30px;
+  background:white;
+  border-radius:15px;
+}
+footer {
+  text-align:center;
+  padding:25px;
+  color:#69728d;
+  font-size:.85rem;
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="logo">🌈 EDU KIDZ</div>
+  <p>Belajar sambil bermain! 🎮<br>
+  Pilih peringkat pembelajaran dan subtopik kegemaran anda.</p>
+</header>
+
+<main>
+  <input id="search" class="search-box" type="search"
+    placeholder="🔎 Cari subtopik, contoh: Pecahan, Wang, Masa..."
+    aria-label="Cari subtopik pembelajaran">
+
+  <div class="toolbar" id="filters" aria-label="Tapis peringkat">
+    <button type="button" class="filter active" data-filter="all">🌟 Semua</button>
+    <button type="button" class="filter" data-filter="pra">🎒 Pra Sekolah</button>
+    <button type="button" class="filter" data-filter="1">📘 Tahun 1</button>
+    <button type="button" class="filter" data-filter="2">📗 Tahun 2</button>
+    <button type="button" class="filter" data-filter="3">📙 Tahun 3</button>
+    <button type="button" class="filter" data-filter="4">📕 Tahun 4</button>
+    <button type="button" class="filter" data-filter="5">📔 Tahun 5</button>
+    <button type="button" class="filter" data-filter="6">🎓 Tahun 6</button>
+  </div>
+
+  <h2 class="section-title">🕹️ Pilih Game Pembelajaran</h2>
+  <div class="grid" id="menu"></div>
+
+  <div class="empty" id="empty" role="status">
+    <h3>🤔 Subtopik tidak dijumpai</h3>
+    <p>Cuba perkataan carian yang lain.</p>
+  </div>
+</main>
+
+<footer>© EDU KIDZ · Belajar dengan Ceria 🌈</footer>
+
+<script>
+"use strict";
+
+const menus = [
+  {
+    id:"pra",
+    title:"🎒 PRA SEKOLAH",
+    desc:"Pembelajaran awal kanak-kanak",
+    color:0,
+    topics:[
+      ["Matematik","games/pra-sekolah/matematik.html"],
+      ["Bahasa Melayu","games/pra-sekolah/bahasa-melayu.html"],
+      ["English","games/pra-sekolah/english.html"]
+    ]
+  },
+  {
+    id:"1",
+    title:"📘 TAHUN 1",
+    desc:"Matematik Tahun 1",
+    color:1,
+    topics:[
+      ["Nombor 0 hingga 100","games/tahun-1/t1_sub1.html"],
+      ["Tambah dan Tolak","games/tahun-1/t1_sub2.html"],
+      ["Pecahan","games/tahun-1/t1_sub3.html"],
+      ["Wang","games/tahun-1/t1_sub4.html"],
+      ["Masa","games/tahun-1/t1_sub5.html"],
+      ["Panjang, Jisim dan Isipadu Cecair","games/tahun-1/t1_sub6.html"],
+      ["Bentuk","games/tahun-1/t1_sub7.html"],
+      ["Pengurusan Data","games/tahun-1/t1_sub8.html"]
+    ]
+  },
+  {
+    id:"2",
+    title:"📗 TAHUN 2",
+    desc:"Matematik Tahun 2",
+    color:2,
+    topics:[
+      ["Nombor hingga 1,000","games/tahun-2/t2_sub1.html"],
+      ["Operasi Asas","games/tahun-2/t2_sub2.html"],
+      ["Pecahan dan Perpuluhan","games/tahun-2/t2_sub3.html"],
+      ["Masa","games/tahun-2/t2_sub4.html"],
+      ["Wang","games/tahun-2/t2_sub5.html"],
+      ["Panjang, Jisim dan Isipadu Cecair","games/tahun-2/t2_sub6.html"],
+      ["Bentuk","games/tahun-2/t2_sub7.html"],
+      ["Data","games/tahun-2/t2_sub8.html"]
+    ]
+  },
+  {
+    id:"3",
+    title:"📙 TAHUN 3",
+    desc:"Matematik Tahun 3",
+    color:3,
+    topics:[
+      ["Nombor hingga 10,000","games/tahun-3/t3_sub1.html"],
+      ["Operasi Asas","games/tahun-3/t3_sub2.html"],
+      ["Pecahan, Perpuluhan dan Peratus","games/tahun-3/t3_sub3.html"],
+      ["Wang","games/tahun-3/t3_sub4.html"],
+      ["Masa","games/tahun-3/t3_sub5.html"],
+      ["Panjang, Jisim dan Isipadu Cecair","games/tahun-3/t3_sub6.html"],
+      ["Bentuk","games/tahun-3/t3_sub7.html"],
+      ["Koordinat","games/tahun-3/t3_sub8.html"],
+      ["Data","games/tahun-3/t3_sub9.html"]
+    ]
+  },
+  {
+    id:"4",
+    title:"📕 TAHUN 4",
+    desc:"Matematik Tahun 4",
+    color:4,
+    topics:[
+      ["Nombor dan Operasi","games/tahun-4/t4_sub1.html"],
+      ["Pecahan, Perpuluhan dan Peratus","games/tahun-4/t4_sub2.html"],
+      ["Wang","games/tahun-4/t4_sub3.html"],
+      ["Masa","games/tahun-4/t4_sub4.html"],
+      ["Panjang, Jisim dan Isipadu Cecair","games/tahun-4/t4_sub5.html"],
+      ["Ruang","games/tahun-4/t4_sub6.html"],
+      ["Koordinat, Nisbah dan Kadaran","games/tahun-4/t4_sub7.html"],
+      ["Data","games/tahun-4/t4_sub8.html"]
+    ]
+  },
+  {
+    id:"5",
+    title:"📔 TAHUN 5",
+    desc:"Matematik Tahun 5",
+    color:5,
+    topics:[
+      ["Nombor","games/tahun-5/t5_sub1.html"],
+      ["Pecahan, Perpuluhan dan Peratus","games/tahun-5/t5_sub2.html"],
+      ["Wang","games/tahun-5/t5_sub3.html"],
+      ["Masa","games/tahun-5/t5_sub4.html"],
+      ["Panjang, Jisim dan Isipadu Cecair","games/tahun-5/t5_sub5.html"],
+      ["Ruang","games/tahun-5/t5_sub6.html"],
+      ["Koordinat, Nisbah dan Kadaran","games/tahun-5/t5_sub7.html"],
+      ["Data","games/tahun-5/t5_sub8.html"]
+    ]
+  },
+  {
+    id:"6",
+    title:"🎓 TAHUN 6",
+    desc:"Matematik Tahun 6",
+    color:1,
+    topics:[
+      ["Nombor","games/tahun-6/t6_sub1.html"],
+      ["Pecahan, Perpuluhan dan Peratus","games/tahun-6/t6_sub2.html"],
+      ["Wang","games/tahun-6/t6_sub3.html"],
+      ["Masa","games/tahun-6/t6_sub4.html"],
+      ["Ukuran dan Sukatan","games/tahun-6/t6_sub5.html"],
+      ["Ruang","games/tahun-6/t6_sub6.html"],
+      ["Koordinat, Nisbah dan Kadaran","games/tahun-6/t6_sub7.html"],
+      ["Data dan Kebolehjadian","games/tahun-6/t6_sub8.html"]
+    ]
+  }
+];
+
+const menuEl = document.getElementById("menu");
+const searchEl = document.getElementById("search");
+const emptyEl = document.getElementById("empty");
+const filterButtons = document.querySelectorAll(".filter");
+let activeFilter = "all";
+
+function render() {
+  const q = searchEl.value.trim().toLocaleLowerCase("ms");
+  menuEl.replaceChildren();
+  let count = 0;
+
+  menus.forEach(group => {
+    if (activeFilter !== "all" && group.id !== activeFilter) return;
+
+    const topics = group.topics.filter(([name]) =>
+      (name + " " + group.title + " " + group.desc)
+        .toLocaleLowerCase("ms").includes(q)
+    );
+
+    if (!topics.length) return;
+    count++;
+
+    const card = document.createElement("section");
+    card.className = "card";
+
+    const head = document.createElement("div");
+    head.className = "card-head color-" + group.color;
+
+    const title = document.createElement("h2");
+    title.textContent = group.title;
+
+    const desc = document.createElement("p");
+    desc.textContent = group.desc;
+
+    head.append(title, desc);
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    topics.forEach(([name, url]) => {
+      const link = document.createElement("a");
+      link.className = "topic";
+      link.href = url;
+
+      const label = document.createElement("span");
+      label.textContent = "📚 " + name;
+
+      const arrow = document.createElement("span");
+      arrow.className = "arrow";
+      arrow.textContent = "›";
+      arrow.setAttribute("aria-hidden", "true");
+
+      link.append(label, arrow);
+      body.appendChild(link);
+    });
+
+    card.append(head, body);
+    menuEl.appendChild(card);
+  });
+
+  emptyEl.style.display = count ? "none" : "block";
+}
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+
+    filterButtons.forEach(b =>
+      b.classList.toggle("active", b === button)
+    );
+
+    render();
+  });
+});
+
+searchEl.addEventListener("input", render);
+render();
+</script>
+</body>
+</html>
